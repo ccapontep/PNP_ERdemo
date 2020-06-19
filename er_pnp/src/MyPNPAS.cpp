@@ -76,7 +76,7 @@ public:
 
 int main(int argc, char** argv)
 {
-  ros::init(argc, argv, "mypnpas");
+  ros::init(argc, argv, "erpnpas");
 
   MyPNPActionServer mypnpas;
   mypnpas.start();
