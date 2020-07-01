@@ -1,9 +1,10 @@
-# er_action examples
+# PNP ER demo
 
 This folder contains a full example of PNP application using ROS actions.
 
 Organization of the folders:
 
+* `er_pddl`: PDDL domain and problem descriptions for plan generation
 * `er_action` and `er_action_msgs`: implementation of basic actions (no PNP code)
 * `er_pnp`: plans and scripts to run plans (PNP ActionServer code)
 * `er_demo`: overall demo launch
