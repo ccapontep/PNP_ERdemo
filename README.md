@@ -88,7 +88,7 @@ Plans can be generated with PDDL planners.
 
 
 
-Generate a plan from PDDL output file
+Generate a PNP from PDDL output file
 
         cd ~/src/er_pddl
         pnpgen_linear ER.pddlout
@@ -97,6 +97,13 @@ Note: file format is detected from file name extension, for PDDL output
 make sure your file extention is ```.pddlout```.
 
 This will generate the PNP ```ER.pnml``` corresponding to this plan.
+
+To visualize the generated PNP, use Jarp
+
+        jarp.sh
+
+and then open the generated ```pnml``` file.
+
 
 
 ## Run generated plans
