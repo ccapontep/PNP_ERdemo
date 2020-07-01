@@ -1,7 +1,6 @@
 # er_action examples
 
 This folder contains a full example of PNP application using ROS actions.
-It is suggested to run these examples in the docker containers. Follow instructions in [PetriNetPlans/docker](/docker) to build a docker image and run a docker container containing this example.
 
 Organization of the folders:
 
@@ -9,8 +8,32 @@ Organization of the folders:
 * `er_pnp`: plans and scripts to run plans (PNP ActionServer code)
 * `er_demo`: overall demo launch
 
+## Docker image
 
-## Link and compile er_action packages
+It is suggested to run these examples in docker containers. 
+Follow instructions in [PetriNetPlans/docker](/docker) to build 
+PNP docker image for Ubuntu 16.04 and ROS kinetic.
+Make sure you can succesfully run the PNP image
+```ub1604_kinetic_pnp:1.0```
+
+
+Then, build a new docker image including this demo.
+
+        ./build.bash
+
+and run the image
+
+        ./run.bash
+
+Note: if you want to link your local directories of PNP and this demo in the docker image,
+use instead
+
+        ./run_dev.bash
+
+in this way you can develop the demo within the docker container.
+
+
+## Link and compile this demo
 
 ```diff
 - Note: not needed if you are using the docker image. -
@@ -18,18 +41,20 @@ Organization of the folders:
 
 Make sure PNP and PNPros have been installed and build ROS packages in this folder.
 
+ADD er_pnp /home/robot/src/er_pnp
+ADD er_demo /home/robot/src/er_demo
+ADD er_pddl /home/robot/src/er_pddl
+
 Example:
 
         cd ~/ros/catkin_ws/src
-        ln -s $HOME/src/PetriNetPlans/PNPros/examples/er_pnp-demo/er_action . 
-        ln -s $HOME/src/PetriNetPlans/PNPros/examples/er_pnp-demo/er_action_msgs . 
-        ln -s $HOME/src/PetriNetPlans/PNPros/examples/er_pnp-demo/er_pnp . 
-        ln -s $HOME/src/PetriNetPlans/PNPros/examples/er_pnp-demo/er_demo .
+        ln -s <path_to_this_repository>/er_pnp . 
+        ln -s <path_to_this_repository>/er_demo .
         cd ..
         catkin_make
 
 
-## Single robot execution
+## Running the demo
 
 Start the demo
 
@@ -48,63 +73,50 @@ Stop the current plan
         roscd er_pnp/scripts
         ./runplan.bash stop
 
-
-## Multi-robot execution
-
-NOTE: Multi-robot configuration not working yet on ROS Melodic (Ubuntu 18.04)!
-
-Start the demo
-
-        roscd er_demo/scripts
-        ./start_demo.bash  multirobot
-
-Run a plan for each robot
-
-        roscd er_pnp/scripts
-        ./runplan.bash robot_0 sequence_loop
-        ./runplan.bash robot_1 sequence_loop
-
-Stop the current plan for each robot
-
-        roscd er_pnp/scripts
-        ./runplan.bash robot_0 stop
-        ./runplan.bash robot_1 stop
-
-
-## Plans available
-
-
-Plans available in `er_pnp\plans` folder: `sequence_loop`, `sensing`, `interrupt`, `fork_join`.
-
-### `sequence_loop`
-
-![plan1](er_pnp/plans/sequence_loop.png)
-
-### `sensing`
-
-![plan1](er_pnp/plans/sensing.png)
-
-
-### `interrupt`
-
-![plan1](er_pnp/plans/interrupt.png)
-
-### `fork_join`
-
-![plan1](er_pnp/plans/fork_join.png)
-
-### `multi_robot`
-
-![plan1](er_pnp/plans/multi_robot.png)
-
-
-
-Notes: 1) the `obstacle` condition can be activated by placing (drag with mouse) the red box in the simulated environment in front of the robot; 2) the `wave` action outputs some text on the screen.
-
-
-## Quit the simulation
+Quit the simulation
 
         rosnode kill -a
+
+
+## Plan generation
+
+Plans can be generated with PDDL planners.
+
+
+        TODO
+
+
+
+Generate a plan from PDDL output file
+
+        cd ~/src/er_pddl
+        pnpgen_linear ER.pddlout
+
+Note: file format is detected from file name extension, for PDDL output
+make sure your file extention is ```.pddlout```.
+
+This will generate the PNP ```ER.pnml``` corresponding to this plan.
+
+
+## Run generated plans
+
+To run a new plan generated from a PDDL domain, you need to execute these two steps.
+
+1) Implement all the actions referred in the plan.
+
+        TODO ...
+
+2) Run the action server to manage these actions
+
+        TODO ...
+
+3) Run the new plan
+
+        cp <new_plan> ~/src/er_pnp/plans
+        roscd er_pnp/scripts
+        ./runplan.bash <new_plan>
+
+
 
 
 ## Implementation details
