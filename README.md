@@ -81,10 +81,17 @@ Quit the simulation
 
 ## Plan generation
 
-Plans can be generated with PDDL planners.
+Plans can be generated with PDDL planners. One such planner you can use is http://planning.domains/
 
+To create your plans, create a domain and problem in the editor http://editor.planning.domains/
 
-        TODO
+Resources and examples to write your PDDL plan:
+http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
+http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
+
+To compute/run your plan, select "Solve" and choose your domain, problem and chosen planner. A tab will open with your plan output as a .txt file. 
+
+Save your domain, problem, and plan output to your pnp-demo pddl folder (e.g. er_pnp-demo/er_pddl). Rename your plan output to extension .pddlout (e.g. ER.pddlout).
 
 
 
@@ -102,7 +109,7 @@ To visualize the generated PNP, use Jarp
 
         jarp.sh
 
-and then open the generated ```pnml``` file.
+and then open the generated ```pnml``` file.	
 
 
 
@@ -112,7 +119,16 @@ To run a new plan generated from a PDDL domain, you need to execute these two st
 
 1) Implement all the actions referred in the plan.
 
-        TODO ...
+Create file of action and add in it the goal, result, and feedback needed for the action
+	```
+        cd er_action_msgs/action
+	touch Say.action 
+	```
+In CMakeLists.txt change:
+	- Add your action and remove others from: 
+		add_action_files( ~~Turn.action~~ 
+				  Say.action)
+All other items are kept the same as the example in er_action_msgs for CMakeLists.txt and package.xml. If other dependencies are needed to build or run, add them into these files.
 
 2) Run the action server to manage these actions
 
@@ -173,7 +189,6 @@ Example:
             }
 
         };
-
 
 
 
