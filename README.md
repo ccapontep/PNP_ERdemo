@@ -85,11 +85,11 @@ Plans can be generated with PDDL planners. One such planner you can use is http:
 
 1. To create your plans, create a domain and problem in the editor http://editor.planning.domains/
 
-Resources and examples to write your PDDL plan:
+	Resources and examples to write your PDDL plan:
 
-- http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
+		- http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
 
-- http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
+		- http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
 
 
 2. To compute/run your plan, select "Solve" and choose your domain, problem and chosen planner. A tab will open with your plan output as a .txt file. 
