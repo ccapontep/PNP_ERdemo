@@ -83,15 +83,18 @@ Quit the simulation
 
 Plans can be generated with PDDL planners. One such planner you can use is http://planning.domains/
 
-To create your plans, create a domain and problem in the editor http://editor.planning.domains/
+1. To create your plans, create a domain and problem in the editor http://editor.planning.domains/
 
 Resources and examples to write your PDDL plan:
-http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
-http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
 
-To compute/run your plan, select "Solve" and choose your domain, problem and chosen planner. A tab will open with your plan output as a .txt file. 
+- http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
 
-Save your domain, problem, and plan output to your pnp-demo pddl folder (e.g. er_pnp-demo/er_pddl). Rename your plan output to extension .pddlout (e.g. ER.pddlout).
+- http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
+
+
+2. To compute/run your plan, select "Solve" and choose your domain, problem and chosen planner. A tab will open with your plan output as a .txt file. 
+
+3. Save your domain, problem, and plan output to your pnp-demo pddl folder (e.g. er_pnp-demo/er_pddl). Rename your plan output to extension .pddlout (e.g. ER.pddlout).
 
 
 
@@ -121,10 +124,9 @@ To run a new plan generated from a PDDL domain, you need to execute these two st
 
 Create file of action and add in it the goal, result, and feedback needed for the action
 
-	```
         cd er_action_msgs/action
 	touch Say.action 
-	```
+
 	
 In CMakeLists.txt change:
 
