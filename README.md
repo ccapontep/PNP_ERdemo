@@ -125,7 +125,7 @@ To run a new plan generated from a PDDL domain, you need to execute these two st
 Create file of action and add in it the goal, result, and feedback needed for the action
 
         cd er_action_msgs/action
-		touch Say.action
+	touch Say.action
 	
 In CMakeLists.txt add your action and remove others from: 
 
