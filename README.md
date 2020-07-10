@@ -141,10 +141,10 @@ To test the action message works run:
 	
 Output should be in the form:
 
-	* er_action_msgs/SayAction
-	* er_action_msgs/SayFeedback
-	* er_action_msgs/SayGoal
-	* er_action_msgs/SayResult
+- er_action_msgs/SayAction
+- er_action_msgs/SayFeedback
+- er_action_msgs/SayGoal
+- er_action_msgs/SayResult
 	
 
 
