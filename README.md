@@ -135,6 +135,19 @@ In CMakeLists.txt add your action and remove others from:
 All other items are kept the same as the example in er_action_msgs for CMakeLists.txt and package.xml. 
 If other dependencies are needed to build or run, add them into these files.
 
+To test the action message works run:
+
+	rosmsg list | grep Say
+	
+Output should be in the form:
+
+	er_action_msgs/SayAction
+	er_action_msgs/SayFeedback
+	er_action_msgs/SayGoal
+	er_action_msgs/SayResult
+	
+
+
 2) Run the action server to manage these actions
 
         TODO ...
