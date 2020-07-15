@@ -24,7 +24,7 @@ std::string turn_topic = "turn";
 std::string movebase_topic = "move_base";
 
 actionlib::SimpleActionClient<rp_action_msgs::TurnAction> *ac_turn = NULL;
-actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> *ac_movebase = NULL;  
+actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> *ac_movebase = NULL;
 
 
 /*** ACTIONS ***/
@@ -57,7 +57,7 @@ void ainit(string params, bool *run) {
 void gotopose(string params, bool *run) {
   cout << "### Executing Gotopose ... " << params << endl;
 
-  int i=params.find("_");	
+  int i=params.find("_");
   float GX=atof(params.substr(0,i).c_str());
   int j=params.find("_",i+1);
   float GY=atof(params.substr(i+1,j).c_str());
@@ -71,7 +71,7 @@ void gotopose(string params, bool *run) {
     cout << "### Aborted Gotopose  " << endl;
 }
 
-void home(string params, bool *run) 
+void home(string params, bool *run)
 {
   cout << "### Executing Home ... " << params << endl;
 
@@ -89,7 +89,7 @@ void home(string params, bool *run)
 
 void wave(string params, bool *run) {
     cout << "### Executing Wave ... " << params << endl;
-    
+
     cout << "HELLO FROM " << robotname << " !!!"<<endl;
     boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
 
@@ -102,7 +102,7 @@ void wave(string params, bool *run) {
 void turn360(string params, bool *run) {
 #if 0
     cout << "\033[22;31;1m### Executing turn360 ... " << params << "\033[0m" << endl;
-    
+
     cout << "HELLO FROM " << robotname << " !!!"<<endl;
     boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
 
@@ -126,7 +126,7 @@ void turn360(string params, bool *run) {
     ac.cancelAllGoals(); ros::Duration(1).sleep(); // wait 1 sec
 
     int counter = 0;
-    
+
     while (counter++ != 3)
     {
       // Set the goal
@@ -169,7 +169,7 @@ void sense1(string params, bool *run) {
 int closeToHomeCond(string params) {
   int r = -1; // unknown
   double x, y, theta;
-  
+
   if (getRobotPose(robotname,x,y,theta)) {
     if ((fabs(x - 2) <= 4) && (fabs(y - 2) <= 4)) {
         // cerr << "\033[22;34;1mCloseToHome\033[0m" << endl;
@@ -181,4 +181,3 @@ int closeToHomeCond(string params) {
   }
   return r;
 }
-

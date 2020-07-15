@@ -36,6 +36,6 @@ docker run -it \
     -v $ERPNP_FOLDER/er_pnp:/home/robot/src/er_pnp \
     -v $ERPNP_FOLDER/er_demo:/home/robot/src/er_demo \
     -v $ERPNP_FOLDER/er_pddl:/home/robot/src/er_pddl \
+    -v $ERPNP_FOLDER/er_action_msgs:/home/robot/src/er_action_msgs \
+    -v $ERPNP_FOLDER/er_action:/home/robot/src/er_action \
     $IMAGENAME:$VERSION
-
-

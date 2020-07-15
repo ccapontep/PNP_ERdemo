@@ -15,4 +15,3 @@ if [ ! "$2" == "" ]; then
 fi
 
 docker build --no-cache -t $IMAGENAME:$VERSION -f $DOCKERFILE .
-

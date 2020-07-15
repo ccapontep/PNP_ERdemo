@@ -59,17 +59,17 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate actions in the 'action' folder
- add_action_files(
+add_action_files(
    FILES
-   Turn.action
+   Say.action
 #   Action2.action
- )
+)
 
 ## Generate added messages and services with any dependencies listed here
- generate_messages(
+generate_messages(
    DEPENDENCIES
    actionlib_msgs
- )
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -83,8 +83,8 @@ find_package(catkin REQUIRED COMPONENTS
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES er_action_msgs
-#  CATKIN_DEPENDS actionlib actionlib_msgs message_generation
-#  DEPENDS system_lib
+  #CATKIN_DEPENDS rospy #actionlib actionlib_msgs message_generation
+  DEPENDS message_runtime #system_lib
 )
 
 ###########

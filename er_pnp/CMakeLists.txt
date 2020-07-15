@@ -7,6 +7,7 @@ project(er_pnp)
 find_package(catkin REQUIRED COMPONENTS
   actionlib
   rp_action_msgs
+  er_action_msgs
   move_base
   pnp_ros
   roscpp

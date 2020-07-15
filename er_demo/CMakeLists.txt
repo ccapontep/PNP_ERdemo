@@ -6,7 +6,7 @@ project(er_demo)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED COMPONENTS
   actionlib
-  rp_action_msgs
+  er_action_msgs
   move_base
   pnp_ros
   roscpp

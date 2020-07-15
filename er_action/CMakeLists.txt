@@ -108,12 +108,12 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-add_executable(gotopose src/gotopose.cpp src/robotpose.cpp)
-target_link_libraries(gotopose ${catkin_LIBRARIES})
-add_executable(stopmove src/stopmove.cpp)
-target_link_libraries(stopmove ${catkin_LIBRARIES})
-add_executable(turn src/turn.cpp src/robotpose.cpp)
-target_link_libraries(turn ${catkin_LIBRARIES})
+#add_executable(gotopose src/gotopose.cpp src/robotpose.cpp)
+#target_link_libraries(gotopose ${catkin_LIBRARIES})
+#add_executable(stopmove src/stopmove.cpp)
+#target_link_libraries(stopmove ${catkin_LIBRARIES})
+#add_executable(turn src/turn.cpp src/robotpose.cpp)
+#target_link_libraries(turn ${catkin_LIBRARIES})
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes

@@ -81,10 +81,20 @@ Quit the simulation
 
 ## Plan generation
 
-Plans can be generated with PDDL planners.
+Plans can be generated with PDDL planners. One such planner you can use is http://planning.domains/
+
+1. To create your plans, create a domain and problem in the editor http://editor.planning.domains/
+
+   Resources and examples to write your PDDL plan:
+
+	http://users.cecs.anu.edu.au/~patrik/pddlman/writing.html
+
+	http://www.cs.toronto.edu/~sheila/384/w11/Assignments/A3/veloso-PDDL_by_Example.pdf
 
 
-        TODO
+2. To compute/run your plan, select "Solve" and choose your domain, problem and chosen planner. A tab will open with your plan output as a .txt file. 
+
+3. Save your domain, problem, and plan output to your pnp-demo pddl folder (e.g. er_pnp-demo/er_pddl). Rename your plan output to extension .pddlout (e.g. ER.pddlout).
 
 
 
@@ -102,7 +112,7 @@ To visualize the generated PNP, use Jarp
 
         jarp.sh
 
-and then open the generated ```pnml``` file.
+and then open the generated ```pnml``` file.	
 
 
 
@@ -112,7 +122,59 @@ To run a new plan generated from a PDDL domain, you need to execute these two st
 
 1) Implement all the actions referred in the plan.
 
-        TODO ...
+Create file of action and add in it the goal, result, and feedback needed for the action
+
+        cd er_action_msgs/action
+	touch Say.action
+	
+In CMakeLists.txt add your action and remove others from: 
+
+	add_action_files( ~~Turn.action~~ 
+			  Say.action)
+				  
+All other items are kept the same as the example in er_action_msgs for CMakeLists.txt and package.xml. 
+If other dependencies are needed to build or run, add them into these files.
+
+To test the action message works run:
+
+	rosmsg list | grep Say
+	
+Output should be in the form:
+
+	er_action_msgs/SayAction
+	er_action_msgs/SayFeedback
+	er_action_msgs/SayGoal
+	er_action_msgs/SayResult
+	
+
+Or also test using:
+	python -c 'from er_action_msgs.msg import SayAction; print "Hey, it worked!"' 
+
+--
+
+Create your action server and client with the action message created above. 
+
+Resources for examples:
+- http://wiki.ros.org/actionlib (general, both c++ and python)
+- http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29 (python)
+
+Make your files executables so they can run using:
+
+	chmod +x filename.py
+
+Update CMakeList.txt, package.xml, and robot.launch files so it has no duplicate actions and names (replace any 'er_action' and 'er_action_msgs' to your own package name).
+
+Build your packages again:
+	
+	cd ~/playground/er_pnp-demo
+	./run_dev.bash
+
+Check that your files can run:
+	
+	rosnode list | grep server
+	#output: /conv2screen_server
+
+
 
 2) Run the action server to manage these actions
 
