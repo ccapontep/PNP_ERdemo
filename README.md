@@ -141,11 +141,39 @@ To test the action message works run:
 	
 Output should be in the form:
 
-- er_action_msgs/SayAction
-- er_action_msgs/SayFeedback
-- er_action_msgs/SayGoal
-- er_action_msgs/SayResult
+	er_action_msgs/SayAction
+	er_action_msgs/SayFeedback
+	er_action_msgs/SayGoal
+	er_action_msgs/SayResult
 	
+
+Or also test using:
+	python -c 'from er_action_msgs.msg import SayAction; print "Hey, it worked!"' 
+
+--
+
+Create your action server and client with the action message created above. 
+
+Resources for examples:
+- http://wiki.ros.org/actionlib (general, both c++ and python)
+- http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29 (python)
+
+Make your files executables so they can run using:
+
+	chmod +x filename.py
+
+Update CMakeList.txt, package.xml, and robot.launch files so it has no duplicate actions and names (replace any 'er_action' and 'er_action_msgs' to your own package name).
+
+Build your packages again:
+	
+	cd ~/playground/er_pnp-demo
+	./run_dev.bash
+
+Check that your files can run:
+	
+	rosnode list | grep server
+	#output: /conv2screen_server
+
 
 
 2) Run the action server to manage these actions
@@ -207,7 +235,6 @@ Example:
             }
 
         };
-
 
 
 
