@@ -99,6 +99,70 @@ void wave(string params, bool *run) {
         cout << "### Aborted Wave  " << endl;
 }
 
+// #####################################################################3
+// Added for ER_pnp-demo
+void moverobot(string params, bool *run) {
+  cout << "### Executing moveRobot ... " << params << endl;
+
+  int i=params.find("_");
+  float GX=atof(params.substr(0,i).c_str());
+  int j=params.find("_",i+1);
+  float GY=atof(params.substr(i+1,j).c_str());
+  float GTh=atof(params.substr(j+1).c_str());
+
+  start_gotopose(GX, GY, GTh, run);
+
+  if (*run)
+    cout << "### Finished moveRobot " << endl;
+  else
+    cout << "### Aborted moveRobot  " << endl;
+}
+
+void accompanyhuman(string params, bool *run) {
+  cout << "### Executing accompanyHuman ... " << params << endl;
+
+  int i=params.find("_");
+  float GX=atof(params.substr(0,i).c_str());
+  int j=params.find("_",i+1);
+  float GY=atof(params.substr(i+1,j).c_str());
+  float GTh=atof(params.substr(j+1).c_str());
+
+  start_gotopose(GX, GY, GTh, run);
+
+  if (*run)
+    cout << "### Finished accompanyHuman " << endl;
+  else
+    cout << "### Aborted accompanyHuman  " << endl;
+}
+
+void dialog(string params, bool *run) {
+    cout << "### Executing Dialog ... " << params << endl;
+
+    cout << "Hello from " << robotname << "! How can I help you??"<<endl;
+    boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+
+    if (*run)
+        cout << "### Finished Dialog " << endl;
+    else
+        cout << "### Aborted Dialog  " << endl;
+}
+
+void resolveissue(string params, bool *run) {
+    cout << "### Executing ResolveIssue ... " << params << endl;
+
+    cout << "Can you hlp me with this issue? "<<endl;
+    boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+
+    if (*run)
+        cout << "### Finished ResolveIssue " << endl;
+    else
+        cout << "### Aborted ResolveIssue  " << endl;
+}
+
+// Done with ER_pnp-demo actions
+// #####################################################################3
+
+
 void turn360(string params, bool *run) {
 #if 0
     cout << "\033[22;31;1m### Executing turn360 ... " << params << "\033[0m" << endl;

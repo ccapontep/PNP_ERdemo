@@ -125,38 +125,39 @@ To run a new plan generated from a PDDL domain, you need to execute these two st
 Create file of action and add in it the goal, result, and feedback needed for the action
 
         cd er_action_msgs/action
-	touch Say.action
+	touch Dialog.action
 	
 In CMakeLists.txt add your action and remove others from: 
 
 	add_action_files( ~~Turn.action~~ 
-			  Say.action)
+			  Dialog.action)
 				  
 All other items are kept the same as the example in er_action_msgs for CMakeLists.txt and package.xml. 
 If other dependencies are needed to build or run, add them into these files.
 
 To test the action message works run:
 
-	rosmsg list | grep Say
+	rosmsg list | grep Dialog
 	
 Output should be in the form:
 
-	er_action_msgs/SayAction
-	er_action_msgs/SayFeedback
-	er_action_msgs/SayGoal
-	er_action_msgs/SayResult
+	er_action_msgs/DialogAction
+	er_action_msgs/DialogFeedback
+	er_action_msgs/DialogGoal
+	er_action_msgs/DialogResult
 	
 
 Or also test using:
-	python -c 'from er_action_msgs.msg import SayAction; print "Hey, it worked!"' 
+	python -c 'from er_action_msgs.msg import DialogAction; print "Hey, it worked!"' 
 
 --
 
 Create your action server and client with the action message created above. 
 
 Resources for examples:
-- http://wiki.ros.org/actionlib (general, both c++ and python)
-- http://wiki.ros.org/ROS/Tutorials/WritingServiceClient%28python%29 (python)
+- http://wiki.ros.org/actionlib (general, both C++ and Python)
+- http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29	(Python Action Server)
+- http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29 	(Python Action Client)
 
 Make your files executables so they can run using:
 
@@ -171,9 +172,18 @@ Build your packages again:
 
 Check that your files can run:
 	
+	rosrun er_action conv2screen_server.py
 	rosnode list | grep server
-	#output: /conv2screen_server
+	#output: 	/conv2screen_server
 
+For more info about your node:
+
+	rosnode info /conv2screen_server
+
+To check that the client runs correctly with the server, in another tab:
+
+	rosrun er_action conv2screen_client.py
+	#output: 	Result: Hello, how can I help you?
 
 
 2) Run the action server to manage these actions

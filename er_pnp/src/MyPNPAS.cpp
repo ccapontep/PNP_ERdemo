@@ -25,8 +25,8 @@ private:
 
 public:
 
-    MyPNPActionServer() : PNPActionServer() { 
-        event_pub = handle.advertise<std_msgs::String>("PNPConditionEvent", 10); 
+    MyPNPActionServer() : PNPActionServer() {
+        event_pub = handle.advertise<std_msgs::String>("PNPConditionEvent", 10);
         laser_sub = handle.subscribe("scan", 10, &MyPNPActionServer::laser_callback, this);
 
         // robotname external defined in MyActions.h/cpp
@@ -40,8 +40,14 @@ public:
         register_action("sense1",&sense1);
         register_action("turn360",&turn360);
 
+        // added for ER_pnp-demo
+        register_action("dialog",&dialog);
+        register_action("resolveissue",&resolveissue);
+        register_action("moverobot",&moverobot);
+        register_action("accompanyhuman",&accompanyhuman);
+
         register_condition("closeToHome",&closeToHomeCond);
-	
+
     }
 
     /*
@@ -55,7 +61,7 @@ public:
 
         return res;
       }
-      
+
       return PNPActionServer::evalCondition(cond);
     }
     */
@@ -84,4 +90,3 @@ int main(int argc, char** argv)
 
   return 0;
 }
-

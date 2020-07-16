@@ -2,30 +2,27 @@
 # -*- coding: utf-8 -*-
 
 '''
-# Name: conv2scrn_client.py
+# Name: resolveIssue_client.py
 # Author: Cecilia Aponte
 '''
 
-# Uncomment lines 10, 13, 15 if you're running this node in its own separate
-# terminal window. Otherwise the script will immediately exit and its terminal window will close.
 import rospy
-# Brings in the SimpleActionClient
 import actionlib
-from er_action_msgs.msg import SayAction, SayGoal, SayResult, SayFeedback
+from er_action_msgs.msg import ResolveIssueAction, ResolveIssueGoal, ResolveIssueResult, ResolveIssueFeedback
 
 
 
-def conv2scrn_client():
+def ResolveIssue_client():
     # Creates the SimpleActionClient, passing the type of the action
     # (FibonacciAction) to the constructor.
-    client = actionlib.SimpleActionClient('er_action_msgs', SayAction)
+    client = actionlib.SimpleActionClient('resolveIssue_as', ResolveIssueAction)
 
     # Waits until action server has started up and started listening for goals
     client.wait_for_server()
 
     # Creates a goal to send to the action server.
-    goal = SayGoal()  # creates a goal to send to the action server
-
+    goal = ResolveIssueGoal()  # creates a goal to send to the action server
+    goal.issue = 'lostPerson'
 
     # Sends the goal to the action server.
     client.send_goal(goal)
@@ -34,15 +31,17 @@ def conv2scrn_client():
     client.wait_for_result()
 
     # Prints out the result of executing the action
-    return client.get_result()
+    result = client.get_result()
+
+    return result
 
 if __name__ == '__main__':
     try:
         # Initializes a rospy node so that the SimpleActionClient can
         # publish and subscribe over ROS.
-        rospy.init_node('conv2scrn_client')
-        result = conv2scrn_client()
-        print("Result:", result.result)
+        rospy.init_node('resolveIssue_client')
+        result = ResolveIssue_client()
+        print "Result:", result.sayResolved
         # rospy.spin()  # Maintain the service open
     except rospy.ROSInterruptException:
         print("Program interrupted before completion")

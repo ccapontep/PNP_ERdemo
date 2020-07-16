@@ -2,53 +2,27 @@
 # -*- coding: utf-8 -*-
 
 '''
-# Name: print_to_screen.py
+# Name: dialog_client.py
 # Author: Cecilia Aponte
 '''
 
-# Uncomment lines 10, 13, 15 if you're running this node in its own separate
-# terminal window. Otherwise the script will immediately exit and its terminal window will close.
 import rospy
-# Brings in the SimpleActionClient
 import actionlib
-
-def conv2scrn_server(request):
-    # rospy.init_node('print_to_screen', anonymous=True)
-    print("Please keep this running in a separate tab.")
-    # rospy.spin() # Maintain the service open
-    return EmptyResponse()
-
-def add_two_ints_server():
-    rospy.init_node('add_two_ints_server')
-    s = rospy.Service('add_two_ints', AddTwoInts, handle_add_two_ints)
-    print("Ready to add two ints.")
-    rospy.spin()
-
-if __name__ == "__main__":
-    add_two_ints_server()
-
-
-rospy.init_node('print_to_screen')
-# Creates a service called /my_service with the defined callback
-communicate2screen = rospy.Service('/communicate2screen', Empty, conv2scrn_server)
-rospy.spin()  # Maintain the service open
-
-# if __name__ == '__main__':
-#     main()
+from er_action_msgs.msg import DialogAction, DialogGoal, DialogResult, DialogFeedback
 
 
 
-def conv2scrn_client():
+def Dialog_client():
     # Creates the SimpleActionClient, passing the type of the action
     # (FibonacciAction) to the constructor.
-    client = actionlib.SimpleActionClient('er_action_msgs', DialogAction)
+    client = actionlib.SimpleActionClient('dialog_as', DialogAction)
 
     # Waits until action server has started up and started listening for goals
     client.wait_for_server()
 
     # Creates a goal to send to the action server.
     goal = DialogGoal()  # creates a goal to send to the action server
-
+    goal.command = 'welcome'
 
     # Sends the goal to the action server.
     client.send_goal(goal)
@@ -57,15 +31,17 @@ def conv2scrn_client():
     client.wait_for_result()
 
     # Prints out the result of executing the action
-    return client.get_result()
+    result = client.get_result()
+
+    return result
 
 if __name__ == '__main__':
     try:
         # Initializes a rospy node so that the SimpleActionClient can
         # publish and subscribe over ROS.
-        rospy.init_node('print_to_screen')
-        result = conv2scrn_client()
-        print("Result:", result.result)
+        rospy.init_node('dialog_client')
+        result = Dialog_client()
+        print "Result:", result.conversation
         # rospy.spin()  # Maintain the service open
     except rospy.ROSInterruptException:
         print("Program interrupted before completion")

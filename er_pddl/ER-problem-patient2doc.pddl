@@ -1,120 +1,113 @@
 (define (problem ER-problem-patient2doc)
     (:domain ER-domain)
-    (:objects   main-enterance
-                main-admission
-                main-corridor
-                main-triage
+    (:objects   mainEnterance
+                mainAdmission
+                mainCorridor
+                mainTriage
                 
-                waiting-room
-                bathrooms-patients
-                bathrooms-staff
-                staff-lounge
-                storage-equipment
-                admin-checkout
+                waitingRoom
+                bathroomsPatients
+                bathroomsStaff
+                staffLounge
+                storageEquipment
+                adminCheckout
                 
-                ambulance-enterance
-                ambulance-admission
-                ambulance-triage
-                ambulance-corridor
+                ambulanceEnterance
+                ambulanceAdmission
+                ambulanceTriage
+                ambulanceCorridor
                 
-                consulting-room-1
-                consulting-room-2
-                consulting-room-3
-                consulting-room-4
-                consulting-corridor
+                consultingRoom1
+                consultingRoom2
+                consultingRoom3
+                consultingRoom4
+                consultingCorridor
                 
-                bed-1 bed-2 bed-3
-                bed-4 bed-5 bed-6
-                bed-7
-                bed-corridor
+                bed1 bed2 bed3
+                bed4 bed5 bed6
+                bed7
+                bedCorridor
                 
-                examination-xray
-                operating-room
-                operating-corridor
+                examinationXray
+                operatingRoom
+                operatingCorridor
                 
                 
                 robot
                 human
                 error2solve
-                topic
-                patient-data
-                request-done
-                patient-request
-                water
-                accompany
-                appt-time
-                done-patient2doc
+                getPatientData
+                GoTogether
+                ; requestDone
+                ; patientRequest
+                ; accompany
                 )
 
-    (:init  (adj main-corridor main-admission) (adj main-admission main-corridor)
-            (adj main-corridor admin-checkout) (adj admin-checkout main-corridor)
-            (adj main-corridor main-triage) (adj main-triage main-corridor) 
-            (adj main-corridor main-enterance) (adj main-enterance main-corridor) 
-            (adj main-corridor waiting-room) (adj waiting-room main-corridor) 
-            (adj main-corridor bathrooms-patients) (adj bathrooms-patients main-corridor)
+    (:init  (adj mainCorridor mainAdmission) (adj mainAdmission mainCorridor)
+            (adj mainCorridor adminCheckout) (adj adminCheckout mainCorridor)
+            (adj mainCorridor mainTriage) (adj mainTriage mainCorridor) 
+            (adj mainCorridor mainEnterance) (adj mainEnterance mainCorridor) 
+            (adj mainCorridor waitingRoom) (adj waitingRoom mainCorridor) 
+            (adj mainCorridor bathroomsPatients) (adj bathroomsPatients mainCorridor)
             
-            (adj waiting-room bathrooms-patients) (adj bathrooms-patients waiting-room)
-            (adj bathrooms-staff staff-lounge) (adj staff-lounge bathrooms-staff)
-            (adj main-admission admin-checkout) (adj admin-checkout main-admission)
+            (adj waitingRoom bathroomsPatients) (adj bathroomsPatients waitingRoom)
+            (adj bathroomsStaff staffLounge) (adj staffLounge bathroomsStaff)
+            (adj mainAdmission adminCheckout) (adj adminCheckout mainAdmission)
             
-            (adj main-corridor ambulance-corridor) (adj ambulance-corridor main-corridor)
-            (adj ambulance-corridor consulting-corridor) (adj consulting-corridor ambulance-corridor)
-            (adj consulting-corridor operating-corridor) (adj operating-corridor consulting-corridor)
-            (adj operating-corridor bed-corridor) (adj bed-corridor operating-corridor)
-            (adj bed-corridor ambulance-corridor) (adj ambulance-corridor bed-corridor)
+            (adj mainCorridor ambulanceCorridor) (adj ambulanceCorridor mainCorridor)
+            (adj ambulanceCorridor consultingCorridor) (adj consultingCorridor ambulanceCorridor)
+            (adj consultingCorridor operatingCorridor) (adj operatingCorridor consultingCorridor)
+            (adj operatingCorridor bedCorridor) (adj bedCorridor operatingCorridor)
+            (adj bedCorridor ambulanceCorridor) (adj ambulanceCorridor bedCorridor)
             
-            (adj ambulance-corridor ambulance-triage) (adj ambulance-triage ambulance-corridor)
-            (adj ambulance-corridor storage-equipment) (adj storage-equipment ambulance-corridor)
-            (adj ambulance-corridor ambulance-enterance) (adj ambulance-enterance ambulance-corridor)
-            (adj ambulance-corridor ambulance-admission) (adj ambulance-admission ambulance-corridor)
-            (adj ambulance-corridor bathrooms-staff) (adj bathrooms-staff ambulance-corridor)
-            (adj ambulance-corridor staff-lounge) (adj staff-lounge ambulance-corridor)
+            (adj ambulanceCorridor ambulanceTriage) (adj ambulanceTriage ambulanceCorridor)
+            (adj ambulanceCorridor storageEquipment) (adj storageEquipment ambulanceCorridor)
+            (adj ambulanceCorridor ambulanceEnterance) (adj ambulanceEnterance ambulanceCorridor)
+            (adj ambulanceCorridor ambulanceAdmission) (adj ambulanceAdmission ambulanceCorridor)
+            (adj ambulanceCorridor bathroomsStaff) (adj bathroomsStaff ambulanceCorridor)
+            (adj ambulanceCorridor staffLounge) (adj staffLounge ambulanceCorridor)
             
-            (adj consulting-corridor consulting-room-1) (adj consulting-room-1 consulting-corridor)
-            (adj consulting-corridor consulting-room-2) (adj consulting-room-2 consulting-corridor)
-            (adj consulting-corridor consulting-room-3) (adj consulting-room-3 consulting-corridor)
-            (adj consulting-corridor consulting-room-4) (adj consulting-room-4 consulting-corridor)
-            (adj consulting-corridor examination-xray) (adj examination-xray consulting-corridor)
-            (adj consulting-corridor operating-room) (adj operating-room consulting-corridor)
+            (adj consultingCorridor consultingRoom1) (adj consultingRoom1 consultingCorridor)
+            (adj consultingCorridor consultingRoom2) (adj consultingRoom2 consultingCorridor)
+            (adj consultingCorridor consultingRoom3) (adj consultingRoom3 consultingCorridor)
+            (adj consultingCorridor consultingRoom4) (adj consultingRoom4 consultingCorridor)
+            (adj consultingCorridor examinationXray) (adj examinationXray consultingCorridor)
+            (adj consultingCorridor operatingRoom) (adj operatingRoom consultingCorridor)
             
-            (adj operating-corridor examination-xray) (adj examination-xray operating-corridor)
-            (adj operating-corridor operating-room) (adj operating-room operating-corridor)
+            (adj operatingCorridor examinationXray) (adj examinationXray operatingCorridor)
+            (adj operatingCorridor operatingRoom) (adj operatingRoom operatingCorridor)
             
-            (adj examination-xray storage-equipment) (adj storage-equipment examination-xray)
+            (adj examinationXray storageEquipment) (adj storageEquipment examinationXray)
             
-            (adj bed-corridor bed-1) (adj bed-1 bed-corridor)
-            (adj bed-corridor bed-2) (adj bed-2 bed-corridor)
-            (adj bed-corridor bed-3) (adj bed-3 bed-corridor)
-            (adj bed-corridor bed-4) (adj bed-4 bed-corridor)
-            (adj bed-corridor bed-5) (adj bed-5 bed-corridor)
-            (adj bed-corridor bed-6) (adj bed-6 bed-corridor)
-            (adj bed-corridor bed-7) (adj bed-7 bed-corridor)
-            (adj bed-corridor examination-xray) (adj examination-xray bed-corridor)
-            (adj bed-corridor operating-room) (adj operating-room bed-corridor)
+            (adj bedCorridor bed1) (adj bed1 bedCorridor)
+            (adj bedCorridor bed2) (adj bed2 bedCorridor)
+            (adj bedCorridor bed3) (adj bed3 bedCorridor)
+            (adj bedCorridor bed4) (adj bed4 bedCorridor)
+            (adj bedCorridor bed5) (adj bed5 bedCorridor)
+            (adj bedCorridor bed6) (adj bed6 bedCorridor)
+            (adj bedCorridor bed7) (adj bed7 bedCorridor)
+            (adj bedCorridor examinationXray) (adj examinationXray bedCorridor)
+            (adj bedCorridor operatingRoom) (adj operatingRoom bedCorridor)
             
-            (busy bed-2) (busy bed-6) (busy consulting-room-3) (busy bathrooms-patients)
+            (busy bed2) (busy bed6) (busy consultingRoom3) (busy bathroomsPatients)
             
-            (at human waiting-room) 
+            (at human waitingRoom) 
             (person human)
             
-            (at robot main-triage)
+            (at robot mainTriage)
             (rob robot)
             
-            (conv topic)
             (issue error2solve)
-
-            (time4appt appt-time)
+            (conv getPatientData waitingRoom)
             
-            (Pwater water)
-            (at water storage-equipment)
-            (return-robot main-triage)
             )
 
-    (:goal (and (Pdata patient-data waiting-room)
-                (move-with-human accompany consulting-room-1)
-                ; (req-done accompany)
-                ; (robot-home accompany)
-                
-                ; (at robot consulting-room-1)
-                ; (at human consulting-room-1)
+    (:goal (and 
+                (request robot human getPatientData)
+                (movingTogether consultingRoom1)
+                (not (issue error2solve))
                 )))
+                
+                
+                
+                

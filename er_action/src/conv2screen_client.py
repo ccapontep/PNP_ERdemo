@@ -6,25 +6,22 @@
 # Author: Cecilia Aponte
 '''
 
-# Uncomment lines 10, 13, 15 if you're running this node in its own separate
-# terminal window. Otherwise the script will immediately exit and its terminal window will close.
 import rospy
-# Brings in the SimpleActionClient
 import actionlib
-from er_action_msgs.msg import SayAction, SayGoal, SayResult, SayFeedback
+from er_action_msgs.msg import DialogAction, DialogGoal, DialogResult, DialogFeedback
 
 
 
 def conv2scrn_client():
     # Creates the SimpleActionClient, passing the type of the action
     # (FibonacciAction) to the constructor.
-    client = actionlib.SimpleActionClient('conv2screen_as', SayAction)
+    client = actionlib.SimpleActionClient('conv2screen_as', DialogAction)
 
     # Waits until action server has started up and started listening for goals
     client.wait_for_server()
 
     # Creates a goal to send to the action server.
-    goal = SayGoal()  # creates a goal to send to the action server
+    goal = DialogGoal()  # creates a goal to send to the action server
     goal.command = 'welcome'
 
     # Sends the goal to the action server.

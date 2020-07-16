@@ -61,7 +61,8 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate actions in the 'action' folder
 add_action_files(
    FILES
-   Say.action
+   Dialog.action
+   ResolveIssue.action
 #   Action2.action
 )
 
