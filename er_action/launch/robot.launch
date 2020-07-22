@@ -13,7 +13,7 @@
       <param name="robot_name" value="$(arg robotname)" />
 
       <!-- map_server -->
-      <node pkg="map_server" type="map_server" name="map_server" args="$(find er_demo)/maps/dis-B1.yaml" respawn="false" >
+      <node pkg="map_server" type="map_server" name="map_server" args="$(find er_demo)/maps/ER_planfloor.yaml" respawn="false" >
           <param name="frame_id" value="map" />
       </node>
 

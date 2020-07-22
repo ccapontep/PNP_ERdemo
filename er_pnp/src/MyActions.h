@@ -13,6 +13,12 @@ void wave(string params, bool *run);
 void turn360(string params, bool *run);
 void sense1(string params, bool *run);
 
+void dialog(string params, bool *run);
+void resolveissue(string params, bool *run);
+void moverobot(string params, bool *run);
+void accompanyhuman(string params, bool *run);
+
+
 int closeToHomeCond(string params);
 
 #endif
