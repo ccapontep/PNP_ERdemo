@@ -3,6 +3,11 @@ FROM ub1604_kinetic_pnp:1.0
 
 ### PNP packages ###
 
+USER root
+
+RUN apt-get update && \
+    apt-get install -y ros-kinetic-rviz
+
 USER robot
 
 ADD er_pnp /home/robot/src/er_pnp
