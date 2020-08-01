@@ -48,6 +48,10 @@
 
       </node>
 
+	<node pkg="er_action" type="dialog_server.py" name="dialog" output="screen" />
+
+	<node pkg="er_action" type="resolveIssue_server.py" name="resolveissue" output="screen" />
+
 
     </group>
 

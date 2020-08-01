@@ -1,7 +1,7 @@
 (moverobot robot maintriage maincorridor)
 (moverobot robot maincorridor waitingroom)
 (dialog robot getpatientdata human waitingroom)
-(resolveissue error2solve robot getpatientdata human waitingroom)
+(resolveissue lostperson robot getpatientdata human waitingroom)
 (accompanyhuman robot human getpatientdata waitingroom maincorridor)
 (accompanyhuman robot human getpatientdata maincorridor ambulancecorridor)
 (accompanyhuman robot human getpatientdata ambulancecorridor consultingcorridor)

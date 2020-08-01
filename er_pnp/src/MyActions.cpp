@@ -3,8 +3,14 @@
 #include <actionlib/client/simple_action_client.h>
 #include <move_base_msgs/MoveBaseAction.h>
 #include <sensor_msgs/LaserScan.h>
+//for mapping key of location to coordinates
+// #include <map>
+#include <iostream>
+
 
 #include <rp_action_msgs/TurnAction.h>
+#include <er_action_msgs/DialogAction.h>
+#include <er_action_msgs/ResolveIssueAction.h>
 
 #include <boost/thread/thread.hpp>
 
@@ -39,7 +45,7 @@ void start_gotopose(float GX, float GY, float GTh, bool *run) {
 // Action implementation
 
 void ainit(string params, bool *run) {
-  cout << "### Executing Init ... " << params << endl;
+  cout << "\n### Executing Init ... " << params << endl;
   // Set turn topic
 
   float GX=2.0;
@@ -55,7 +61,7 @@ void ainit(string params, bool *run) {
 }
 
 void gotopose(string params, bool *run) {
-  cout << "### Executing Gotopose ... " << params << endl;
+  cout << "\n### Executing Gotopose ... " << params << endl;
 
   int i=params.find("_");
   float GX=atof(params.substr(0,i).c_str());
@@ -73,7 +79,7 @@ void gotopose(string params, bool *run) {
 
 void home(string params, bool *run)
 {
-  cout << "### Executing Home ... " << params << endl;
+  cout << "\n### Executing Home ... " << params << endl;
 
   float GX=2.0;
   float GY=2.0;
@@ -88,7 +94,7 @@ void home(string params, bool *run)
 }
 
 void wave(string params, bool *run) {
-    cout << "### Executing Wave ... " << params << endl;
+    cout << "\n### Executing Wave ... " << params << endl;
 
     cout << "HELLO FROM " << robotname << " !!!"<<endl;
     boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
@@ -101,14 +107,43 @@ void wave(string params, bool *run) {
 
 // #####################################################################3
 // Added for ER_pnp-demo
-void moverobot(string params, bool *run) {
-  cout << "### Executing moveRobot ... " << params << endl;
 
-  int i=params.find("_");
-  float GX=atof(params.substr(0,i).c_str());
-  int j=params.find("_",i+1);
-  float GY=atof(params.substr(i+1,j).c_str());
-  float GTh=atof(params.substr(j+1).c_str());
+
+// key mapping from location name to map coordinate
+std::map<string, string> initMap() {
+    static std::pair<string, string> data[] = {
+        std::pair<string, string>("waitingroom", "1.77_0.33_0_0"),
+        std::pair<string, string>("maincorridor", "2_1.9_0_0"),
+        std::pair<string, string>("ambulancecorridor", "1.62_3.47_0_0"),
+        std::pair<string, string>("consultingcorridor", "1.82_8.18_0_0"),
+        std::pair<string, string>("consultingroom1", "0.71_10.56_0_0"),
+        std::pair<string, string>("maintriage", "0_1.8_0_0")
+    };
+
+    return map<string, string>(data, data + sizeof(data) / sizeof(*data));
+}
+
+// To initiate the map, use:
+// std::map<string, string> map_loc2coord = initMap();
+
+
+void moverobot(string params, bool *run) {
+  cout << "\n### Executing moveRobot ... " << params << endl;
+  // initiate mapping between map location name and coordinate
+  std::map<string, string> map_loc2coord = initMap();
+  // get index of location name from the plan action
+  int nexti = params.find_last_of("_");
+  // get the location name
+  string nextloc = params.substr(nexti + 1).c_str();
+  cout << "\t~ Moving to the robot to " << nextloc << " ~\n" << endl;
+  // get location coordinate
+  string nextcoord = map_loc2coord[nextloc];
+
+  int i=nextcoord.find("_");
+  float GX=atof(nextcoord.substr(0,i).c_str());
+  int j=nextcoord.find("_",i+1);
+  float GY=atof(nextcoord.substr(i+1,j).c_str());
+  float GTh=atof(nextcoord.substr(j+1).c_str());
 
   start_gotopose(GX, GY, GTh, run);
 
@@ -119,27 +154,76 @@ void moverobot(string params, bool *run) {
 }
 
 void accompanyhuman(string params, bool *run) {
-  cout << "### Executing accompanyHuman ... " << params << endl;
+  cout << "\n### Executing accompanyHuman ... " << params << endl;
 
-  int i=params.find("_");
-  float GX=atof(params.substr(0,i).c_str());
-  int j=params.find("_",i+1);
-  float GY=atof(params.substr(i+1,j).c_str());
-  float GTh=atof(params.substr(j+1).c_str());
+  // initiate mapping between map location name and coordinate
+  std::map<string, string> map_loc2coord = initMap();
+  // get index of location name from the plan action
+  int nexti = params.find_last_of("_");
+  // get the location name
+  string nextloc = params.substr(nexti + 1).c_str();
+  cout << "\t~ Moving to the robot to " << nextloc << " ~\n" << endl;
+  // get location coordinate
+  string nextcoord = map_loc2coord[nextloc];
+
+  int i=nextcoord.find("_");
+  float GX=atof(nextcoord.substr(0,i).c_str());
+  int j=nextcoord.find("_",i+1);
+  float GY=atof(nextcoord.substr(i+1,j).c_str());
+  float GTh=atof(nextcoord.substr(j+1).c_str());
 
   start_gotopose(GX, GY, GTh, run);
 
   if (*run)
-    cout << "### Finished accompanyHuman " << endl;
+    cout << "### Finished moveRobot " << endl;
   else
-    cout << "### Aborted accompanyHuman  " << endl;
+    cout << "### Aborted moveRobot  " << endl;
 }
 
 void dialog(string params, bool *run) {
-    cout << "### Executing Dialog ... " << params << endl;
+    cout << "\n### Executing Dialog ... " << params << endl;
 
-    cout << "Hello from " << robotname << "! How can I help you??"<<endl;
-    boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+    // boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+    int i = params.find("_");
+    string WhoStartsDialog = params.substr(0,i).c_str();
+    int j=params.find("_",i+1);
+    string precommand = params.substr(i+1,j).c_str();
+
+    int k = precommand.find("_");
+    string command = precommand.substr(0,k).c_str();
+    cout << "\t~ Your command is to " << command << " ~\n" << endl;
+
+    // Define the action client (true: we want to spin a thread)
+    actionlib::SimpleActionClient<er_action_msgs::DialogAction> ac("dialog_as", false); // false -> need ros::spin()
+
+    // Wait for the action server to come up
+    while(!ac.waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for dialog action server to come up");
+    }
+
+    // Cancel all goals (JUST IN CASE SOME GOAL WAS NOT CLOSED BEFORE)
+    ac.cancelAllGoals(); ros::Duration(1).sleep(); // wait 1 sec
+
+    // Set the goal
+    er_action_msgs::DialogGoal goal;
+    if (command == "getpatientdata")
+      goal.command = "welcome";
+
+    // Send the goal
+    ROS_INFO("Sending goal");
+    ac.sendGoal(goal);
+
+    // Wait for termination
+    ac.waitForResult(ros::Duration(1.0));
+
+    // Print result
+    if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+      ROS_INFO("Dialog successful");
+    else
+      ROS_INFO("Dialog failed");
+
+    // Cancel all goals (NEEDED TO ISSUE NEW GOALS LATER)
+    ac.cancelAllGoals(); ros::Duration(1).sleep(); // wait 1 sec
 
     if (*run)
         cout << "### Finished Dialog " << endl;
@@ -148,10 +232,46 @@ void dialog(string params, bool *run) {
 }
 
 void resolveissue(string params, bool *run) {
-    cout << "### Executing ResolveIssue ... " << params << endl;
+    cout << "\n### Executing ResolveIssue ... " << params << endl;
 
-    cout << "Can you hlp me with this issue? "<<endl;
-    boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+    // cout << "Can you help me with this issue? "<<endl;
+    // boost::this_thread::sleep(boost::posix_time::milliseconds(2000));
+
+    int i = params.find("_");
+    string issue = params.substr(0,i).c_str();
+
+    cout << "\t~ Your issue to resolve is " << issue << " ~\n" << endl;
+
+    // Define the action client (true: we want to spin a thread)
+    actionlib::SimpleActionClient<er_action_msgs::ResolveIssueAction> ac("resolveIssue_as", false); // false -> need ros::spin()
+
+    // Wait for the action server to come up
+    while(!ac.waitForServer(ros::Duration(5.0))){
+        ROS_INFO("Waiting for resolve-issue action server to come up");
+    }
+
+    // Cancel all goals (JUST IN CASE SOME GOAL WAS NOT CLOSED BEFORE)
+    ac.cancelAllGoals(); ros::Duration(1).sleep(); // wait 1 sec
+
+    // Set the goal
+    er_action_msgs::ResolveIssueGoal goal;
+    goal.issue = issue;
+
+    // Send the goal
+    ROS_INFO("Sending goal");
+    ac.sendGoal(goal);
+
+    // Wait for termination
+    ac.waitForResult(ros::Duration(1.0));
+
+    // Print result
+    if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+      ROS_INFO("Dialog successful");
+    else
+      ROS_INFO("Dialog failed");
+
+    // Cancel all goals (NEEDED TO ISSUE NEW GOALS LATER)
+    ac.cancelAllGoals(); ros::Duration(1).sleep(); // wait 1 sec
 
     if (*run)
         cout << "### Finished ResolveIssue " << endl;
@@ -223,7 +343,7 @@ void turn360(string params, bool *run) {
 }
 
 void sense1(string params, bool *run) {
-  cout << "### Executing Sense1 ... " << params << endl;
+  cout << "\n### Executing Sense1 ... " << params << endl;
 }
 
 

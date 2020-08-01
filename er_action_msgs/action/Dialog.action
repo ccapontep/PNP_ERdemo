@@ -2,6 +2,7 @@
 string command
 ---
 #Result
-string conversation
+string result
 ---
 #Feedback
+string conversation

@@ -35,7 +35,7 @@
                 
                 robot
                 human
-                error2solve
+                lostPerson
                 getPatientData
                 GoTogether
                 ; requestDone
@@ -97,7 +97,7 @@
             (at robot mainTriage)
             (rob robot)
             
-            (issue error2solve)
+            (issue lostPerson)
             (conv getPatientData waitingRoom)
             
             )
@@ -105,7 +105,7 @@
     (:goal (and 
                 (request robot human getPatientData)
                 (movingTogether consultingRoom1)
-                (not (issue error2solve))
+                (not (issue lostPerson))
                 )))
                 
                 

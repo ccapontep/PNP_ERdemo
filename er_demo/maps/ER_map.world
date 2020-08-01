@@ -48,7 +48,7 @@ erratic( pose [   0.0   14 0 0 ] name "robot_0" color "blue")
 
 define box model
 (
-  size [0.400 0.400 0.500]
+  size [0.400 0.400 1.700]
   gui_nose 0
 )
 

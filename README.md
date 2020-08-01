@@ -18,7 +18,7 @@ Make sure you can succesfully run the PNP image
 ```ub1604_kinetic_pnp:1.0```
 
 
-Then, build a new docker image including this demo.
+Then, build a new docker image including this demo. Do this only once, otherwise you will build the docker image each time; to update your application after adding changes see below under run_dev.bash
 
         ./build.bash
 
@@ -31,7 +31,10 @@ use instead
 
         ./run_dev.bash
 
-in this way you can develop the demo within the docker container.
+in this way you can develop the demo within the docker container. Any time you change any C++ or python file, you have to compile by:
+
+	cd ros/catkin_ws
+	catkin_make
 
 
 ## Link and compile this demo
@@ -135,6 +138,11 @@ In CMakeLists.txt add your action and remove others from:
 All other items are kept the same as the example in er_action_msgs for CMakeLists.txt and package.xml. 
 If other dependencies are needed to build or run, add them into these files.
 
+Compile your changes:
+	cd ros/catkin_ws
+	catkin_make
+	source devel/setup.bash
+
 To test the action message works run:
 
 	rosmsg list | grep Dialog
@@ -152,11 +160,15 @@ Or also test using:
 
 --
 
-Create your action server and client with the action message created above. 
+Create your action server and client with the action message created above. The server can be done either in python or C++ and should be added to location: er_action/src. Make sure your server node is running by adding it to the file robot.launch in location er_action/launch as such:
+
+	<node pkg="er_action" type="dialog_server.py" name="dialog" output="screen" />
+
+The client instead has to be in C++ and added to the file MyActions.cpp in location er_pnp/src. 
 
 Resources for examples:
 - http://wiki.ros.org/actionlib (general, both C++ and Python)
-- http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29	(Python Action Server)
+- http://wiki.ros.org/actionlib_tutorials/Tutorials/SimpleActionServer%28ExecuteCallbackMethod%29	(C++ Action Server)
 - http://wiki.ros.org/actionlib_tutorials/Tutorials/Writing%20a%20Simple%20Action%20Client%20%28Python%29 	(Python Action Client)
 
 Make your files executables so they can run using:
@@ -172,17 +184,17 @@ Build your packages again:
 
 Check that your files can run:
 	
-	rosrun er_action conv2screen_server.py
+	rosrun er_action dialog_server.py
 	rosnode list | grep server
-	#output: 	/conv2screen_server
+	#output: 	/dialog_server
 
 For more info about your node:
 
-	rosnode info /conv2screen_server
+	rosnode info /dialog_server
 
 To check that the client runs correctly with the server, in another tab:
 
-	rosrun er_action conv2screen_client.py
+	rosrun er_action dialog_client.py
 	#output: 	Result: Hello, how can I help you?
 
 
@@ -196,6 +208,16 @@ To check that the client runs correctly with the server, in another tab:
         roscd er_pnp/scripts
         ./runplan.bash <new_plan>
 
+
+## Creating a new map
+
+To add your own custom map to the your application, you need a photo of your map from top view that shows each room and walls.
+
+You need to localize your robot so your .yaml file in er_demo/maps is aligned to your .world file. To do this you need to work with rviz, which is already included in the PNP package.
+
+Follow the instruction in section 5.1: http://wiki.ros.org/turtlebot_stage/Tutorials/indigo/Customizing%20the%20Stage%20Simulator
+
+A tutorial for that is: https://www.youtube.com/watch?v=K1ZFkR4YsRQ
 
 
 
