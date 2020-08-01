@@ -40,7 +40,7 @@ floorplan (
 )
 
 # robots
-erratic( pose [ 4.0 19.0 0 0 ] name "robot_0" color "blue")
+erratic( pose [ 17.0 20.0 0 180 ] name "robot_0" color "blue")
 
 
 define box model
@@ -49,7 +49,7 @@ define box model
   gui_nose 0
 )
 
-box( pose [ 11.0 19.0 0 0 ] color "red")
+box( pose [ 9.0 8.0 0 0 ] color "red")
 
 
 

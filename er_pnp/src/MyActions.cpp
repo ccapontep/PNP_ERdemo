@@ -111,13 +111,21 @@ void wave(string params, bool *run) {
 
 // key mapping from location name to map coordinate
 std::map<string, string> initMap() {
+  // USED FOR DIS-B1 MAP
+    // static std::pair<string, string> data[] = {
+    //     std::pair<string, string>("waitingroom", "1.77_0.33_0_0"),
+    //     std::pair<string, string>("maincorridor", "2_1.9_0_0"),
+    //     std::pair<string, string>("ambulancecorridor", "1.62_3.47_0_0"),
+    //     std::pair<string, string>("consultingcorridor", "1.82_8.18_0_0"),
+    //     std::pair<string, string>("consultingroom1", "0.71_10.56_0_0"),
+    //     std::pair<string, string>("maintriage", "0_1.8_0_0")
     static std::pair<string, string> data[] = {
-        std::pair<string, string>("waitingroom", "1.77_0.33_0_0"),
-        std::pair<string, string>("maincorridor", "2_1.9_0_0"),
-        std::pair<string, string>("ambulancecorridor", "1.62_3.47_0_0"),
-        std::pair<string, string>("consultingcorridor", "1.82_8.18_0_0"),
-        std::pair<string, string>("consultingroom1", "0.71_10.56_0_0"),
-        std::pair<string, string>("maintriage", "0_1.8_0_0")
+        std::pair<string, string>("waitingroom", "9.36_9.56_0_0"),
+        std::pair<string, string>("maincorridor", "10.39_14.26_0_0"),
+        std::pair<string, string>("ambulancecorridor", "27.73_15.51_0_0"),
+        std::pair<string, string>("consultingcorridor", "36.56_25.11_0_0"),
+        std::pair<string, string>("consultingroom1", "38.2_27.88_0_0"),
+        std::pair<string, string>("maintriage", "16_19.2_0_0")
     };
 
     return map<string, string>(data, data + sizeof(data) / sizeof(*data));
@@ -135,7 +143,7 @@ void moverobot(string params, bool *run) {
   int nexti = params.find_last_of("_");
   // get the location name
   string nextloc = params.substr(nexti + 1).c_str();
-  cout << "\t~ Moving to the robot to " << nextloc << " ~\n" << endl;
+  cout << "\t~ Moving the robot to " << nextloc << " ~\n" << endl;
   // get location coordinate
   string nextcoord = map_loc2coord[nextloc];
 
@@ -144,6 +152,7 @@ void moverobot(string params, bool *run) {
   int j=nextcoord.find("_",i+1);
   float GY=atof(nextcoord.substr(i+1,j).c_str());
   float GTh=atof(nextcoord.substr(j+1).c_str());
+  cout << "\t~ Moving the robot to " << GX << ", " << GY << ", " << GTh << endl;
 
   start_gotopose(GX, GY, GTh, run);
 
@@ -162,7 +171,7 @@ void accompanyhuman(string params, bool *run) {
   int nexti = params.find_last_of("_");
   // get the location name
   string nextloc = params.substr(nexti + 1).c_str();
-  cout << "\t~ Moving to the robot to " << nextloc << " ~\n" << endl;
+  cout << "\t~ Moving the robot to " << nextloc << " ~\n" << endl;
   // get location coordinate
   string nextcoord = map_loc2coord[nextloc];
 

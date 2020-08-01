@@ -35,6 +35,7 @@ in this way you can develop the demo within the docker container. Any time you c
 
 	cd ros/catkin_ws
 	catkin_make
+	source devel/setup.bash
 
 
 ## Link and compile this demo
