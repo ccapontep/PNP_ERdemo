@@ -8,17 +8,13 @@
 
 import rospy
 import actionlib
-print('----------------------OK----000')
 from er_action_msgs.msg import ResolveIssueAction, ResolveIssueResult, ResolveIssueFeedback #, ResolveIssueGoal
-print('----------------------OK----00')
 
 class ResolveIssue_Server():
 
     def __init__(self):
         self.resolve_server = actionlib.SimpleActionServer("resolveIssue_as", ResolveIssueAction, execute_cb=self.action_cb, auto_start=False)
-        print('----------------------OK----0')
         self.resolve_server.start()
-        print('----------------------OK----1')
 
     def action_cb(self, goal):
 
@@ -29,11 +25,10 @@ class ResolveIssue_Server():
             if self.resolve_server.is_preempt_requested():
                 success = False
                 # break
-            print('----------------------OK----1')
-            dialog_output = ['\nStarting resolving the issue:', goal.issue, '..\n',
-                            '\tRobot: I need you to walk slower, please.'\n',
+            dialog_output = ['\nStarting to resolve the issue: %s..\n' % goal.issue,
+                            '\tRobot: I need you to walk slower, please.\n',
                             '\tPerson: Sorry, I will.\n',
-                            '..finalized dialog\n',
+                            '..finalized dialog to resolve\n',
                             '--------------\n',
                             'Done']
 
