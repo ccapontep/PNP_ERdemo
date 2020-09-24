@@ -5,4 +5,5 @@
 (accompanyhuman robot human getpatientdata waitingroom maincorridor)
 (accompanyhuman robot human getpatientdata maincorridor ambulancecorridor)
 (accompanyhuman robot human getpatientdata ambulancecorridor consultingcorridor)
-(accompanyhuman robot human getpatientdata consultingcorridor consultingroom1)
+(accompanyhuman robot human getpatientdata consultingcorridor consultingroom1out)
+(accompanyhuman robot human getpatientdata consultingroom1out consultingroom1)

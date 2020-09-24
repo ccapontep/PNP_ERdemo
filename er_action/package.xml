@@ -42,7 +42,8 @@
   <build_depend>tf</build_depend>
   <build_depend>er_action_msgs</build_depend>
   <build_depend>pnp_ros</build_depend>
-
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>geometry_msgs</build_depend>
 
   <run_depend>actionlib</run_depend>
   <run_depend>move_base</run_depend>
@@ -52,6 +53,8 @@
   <run_depend>tf</run_depend>
   <run_depend>er_action_msgs</run_depend>
   <run_depend>pnp_ros</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>geometry_msgs</run_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->

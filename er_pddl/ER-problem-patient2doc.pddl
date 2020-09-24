@@ -21,6 +21,12 @@
                 consultingRoom2
                 consultingRoom3
                 consultingRoom4
+                
+                consultingRoom1out
+                consultingRoom2out
+                consultingRoom3out
+                consultingRoom4out
+                
                 consultingCorridor
                 
                 bed1 bed2 bed3
@@ -67,10 +73,16 @@
             (adj ambulanceCorridor bathroomsStaff) (adj bathroomsStaff ambulanceCorridor)
             (adj ambulanceCorridor staffLounge) (adj staffLounge ambulanceCorridor)
             
-            (adj consultingCorridor consultingRoom1) (adj consultingRoom1 consultingCorridor)
-            (adj consultingCorridor consultingRoom2) (adj consultingRoom2 consultingCorridor)
-            (adj consultingCorridor consultingRoom3) (adj consultingRoom3 consultingCorridor)
-            (adj consultingCorridor consultingRoom4) (adj consultingRoom4 consultingCorridor)
+            (adj consultingCorridor consultingRoom1out) (adj consultingRoom1out consultingCorridor)
+            (adj consultingCorridor consultingRoom2out) (adj consultingRoom2out consultingCorridor)
+            (adj consultingCorridor consultingRoom3out) (adj consultingRoom3out consultingCorridor)
+            (adj consultingCorridor consultingRoom4out) (adj consultingRoom4out consultingCorridor)
+            
+            (adj consultingRoom1out consultingRoom1) (adj consultingRoom1 consultingRoom1out)
+            (adj consultingRoom2out consultingRoom2) (adj consultingRoom2 consultingRoom2out)
+            (adj consultingRoom3out consultingRoom3) (adj consultingRoom3 consultingRoom3out)
+            (adj consultingRoom4out consultingRoom4) (adj consultingRoom4 consultingRoom4out)
+            
             (adj consultingCorridor examinationXray) (adj examinationXray consultingCorridor)
             (adj consultingCorridor operatingRoom) (adj operatingRoom consultingCorridor)
             
@@ -107,7 +119,6 @@
                 (movingTogether consultingRoom1)
                 (not (issue lostPerson))
                 )))
-                
                 
                 
                 

@@ -125,6 +125,9 @@ std::map<string, string> initMap() {
         std::pair<string, string>("ambulancecorridor", "27.73_15.51_0_0"),
         std::pair<string, string>("consultingcorridor", "36.56_25.11_0_0"),
         std::pair<string, string>("consultingroom1", "38.2_27.88_0_0"),
+        std::pair<string, string>("consultingroom1out", "38.2_25.15_0_0"),
+        std::pair<string, string>("consultingroom2", "43.84_27.88_0_0"),
+        std::pair<string, string>("consultingroom2out", "43.84_25.15_0_0"),
         std::pair<string, string>("maintriage", "16_19.2_0_0")
     };
 

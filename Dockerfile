@@ -20,6 +20,7 @@ RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/er_action . && \
     ln -s $HOME/src/er_action_msgs . && \
     ln -s $HOME/src/er_pnp . && \
+    ln -s $HOME/src/er_pddl . && \
     ln -s $HOME/src/er_demo .
 
 # Compile ROS packages

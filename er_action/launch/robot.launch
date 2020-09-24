@@ -1,5 +1,5 @@
 <launch>
-	<arg name="multirobot" default="false" />
+    <arg name="multirobot" default="false" />
     <arg name="robotname" default="none" />
     <arg name="initial_pose_x" default="17.0" />
     <arg name="initial_pose_y" default="20.0" />
@@ -48,15 +48,21 @@
 
       </node>
 
-	<node pkg="er_action" type="dialog_server.py" name="dialog" output="screen" />
+	      <node pkg="er_action" type="dialog_server.py" name="dialog" output="screen" />
 
-	<node pkg="er_action" type="resolveIssue_server.py" name="resolveissue" output="screen" />
+        <node pkg="er_action" type="resolveIssue_server.py" name="resolveissue" output="screen" />
+
+        <node pkg="er_action" type="personhere_condition.py" name="personhere_cond" output="screen"/>
+
+        <node pkg="er_action" type="closeddoor_condition.py" name="closeddoor_cond" output="screen"/>
 
 
-    </group>
+
+
 
 
     <!-- Multi-robot -->
+    </group>
 
     <group ns="$(arg robotname)" if="$(arg multirobot)">
       <param name="robot_name" value="$(arg robotname)" />
