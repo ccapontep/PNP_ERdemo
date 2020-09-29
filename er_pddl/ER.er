@@ -4,7 +4,7 @@
 
 *if* personhere *during* moverobot *do* waitfor_not_personhere; restart_action
 
-*if* doorclosed *during* moverobot *do* accompanyhuman_robot_human_getpatientdata_consultingroom1out_consultingroom2; skip_action
+*if* doorclosed *during* accompanyhuman *do* accompanyhuman_robot_human_getpatientdata_consultingroom1out_consultingroom2out and accompanyhuman_robot_human_getpatientdata_consultingroom2out_consultingroom2; skip_action
 
 
 #*if* (and personhere closetotarget) *during* goto *do* skip_action

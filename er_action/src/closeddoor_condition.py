@@ -77,7 +77,7 @@ def doorclosed_cb(msg):
             print 'Door closed'
             rospy.set_param(param, 1)
     else:
-        rospy.set_param(param, 1)
+        rospy.set_param(param, 0)
 
 
 rospy.init_node('closeddoor_cond')
