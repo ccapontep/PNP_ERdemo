@@ -39,6 +39,9 @@ def localizer_cb(data):
 
 def doorclosed_cb(msg):
 
+    if (map_robot_pose is None):
+        return
+
     x = map_robot_pose[0]
     y = map_robot_pose[1]
     angle = map_robot_pose[2]

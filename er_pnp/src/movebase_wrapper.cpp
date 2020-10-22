@@ -19,12 +19,51 @@ void setNamespace(string ns) {
     nsrobot = ns;
 }
 
+tf::TransformListener* listener = NULL;
+
+// will be set first time by testframes()
+string src_frame = "";
+string dest_frame = "";
+
+void testframes() {
+
+    tf::StampedTransform transform;
+    src_frame = "map";
+    dest_frame = "base_link";
+
+	try {
+		listener->waitForTransform(src_frame, dest_frame, ros::Time(0), ros::Duration(3));
+		listener->lookupTransform(src_frame, dest_frame, ros::Time(0), transform);
+        ROS_INFO("Error in tf trasnform %s -> %s\n",src_frame.c_str(), dest_frame.c_str());
+        return;
+    }
+    catch(tf::TransformException ex) {
+        ROS_ERROR("Error in tf trasnform %s -> %s\n",src_frame.c_str(), dest_frame.c_str());
+    }
+
+    src_frame = "map";
+    dest_frame = "base_frame";
+
+	try {
+		listener->waitForTransform(src_frame, dest_frame, ros::Time(0), ros::Duration(3));
+		listener->lookupTransform(src_frame, dest_frame, ros::Time(0), transform);
+        ROS_INFO("Error in tf trasnform %s -> %s\n",src_frame.c_str(), dest_frame.c_str());
+        return;
+    }
+    catch(tf::TransformException ex) {
+        ROS_ERROR("Error in tf trasnform %s -> %s\n",src_frame.c_str(), dest_frame.c_str());
+    }
+
+}
+
 bool getRobotPose(string robotname, double &x, double &y, double &th_rad)
 {
-	tf::TransformListener* listener = new tf::TransformListener();
+    if (!listener)
+	    listener = new tf::TransformListener();
 	tf::StampedTransform transform;
-    string src_frame = "map";
-    string dest_frame = "base_link";
+
+    if (src_frame=="")
+        testframes();
 
     if (robotname!="" && robotname!="none") { // multi-robot: use robotname prefix
         dest_frame = robotname + "/" + dest_frame;
@@ -42,6 +81,10 @@ bool getRobotPose(string robotname, double &x, double &y, double &th_rad)
         th_rad = 999999;
         ROS_ERROR("Error in tf trasnform %s -> %s\n",src_frame.c_str(), dest_frame.c_str());
 		ROS_ERROR("%s", ex.what());
+
+    string dest_frame = "base_link";
+
+
         return false;
 	}
 
