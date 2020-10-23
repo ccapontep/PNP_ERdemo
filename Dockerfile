@@ -1,5 +1,5 @@
 
-FROM ub1604_kinetic_pnp:1.0
+FROM pnp_1604_kinetic
 
 ### PNP packages ###
 

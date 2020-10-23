@@ -2,9 +2,9 @@
 
 # Use  ./run.bash [version]
 
-IMAGENAME=ub1604_kinetic_pnp_demo_er
+IMAGENAME=pnp_er_demo
 
-VERSION=0.1
+VERSION=latest
 if [ ! "$1" == "" ]; then
   VERSION=$1
 fi
@@ -39,3 +39,4 @@ docker run -it \
     -v $ERPNP_FOLDER/er_action_msgs:/home/robot/src/er_action_msgs \
     -v $ERPNP_FOLDER/er_action:/home/robot/src/er_action \
     $IMAGENAME:$VERSION
+
