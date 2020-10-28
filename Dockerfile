@@ -10,18 +10,14 @@ RUN apt-get update && \
 
 USER robot
 
-ADD er_pnp /home/robot/src/er_pnp
-ADD er_demo /home/robot/src/er_demo
-ADD er_pddl /home/robot/src/er_pddl
 ADD er_action /home/robot/src/er_action
 ADD er_action_msgs /home/robot/src/er_action_msgs
+ADD er_pnp /home/robot/src/er_pnp
 
 RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/er_action . && \
     ln -s $HOME/src/er_action_msgs . && \
-    ln -s $HOME/src/er_pnp . && \
-    ln -s $HOME/src/er_pddl . && \
-    ln -s $HOME/src/er_demo .
+    ln -s $HOME/src/er_pnp .
 
 # Compile ROS packages
 
