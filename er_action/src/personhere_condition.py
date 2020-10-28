@@ -18,7 +18,7 @@ def persondist_cb(msg):
     # print 'distance to obstacle', laser_center_dist
 
     conditionName = "personhere"
-    param = "PNPconditionsBuffer/" + conditionName
+    param = "pnp/conditionsBuffer/" + conditionName
     if laser_center_dist < 1.1:
         # print 'Obstacle right in front'
         rospy.set_param(param, 1)

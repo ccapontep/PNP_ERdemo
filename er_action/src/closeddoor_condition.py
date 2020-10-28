@@ -54,7 +54,7 @@ def doorclosed_cb(msg):
     CR4_x = [54.94, 55.94] #55.44
 
     conditionName = "doorclosed"
-    param = "PNPconditionsBuffer/" + conditionName
+    param = "pnp/conditionsBuffer/" + conditionName
 
     # print 'x:', x, '\ty:', y
     # print getRobotPose('',0,0,0)
