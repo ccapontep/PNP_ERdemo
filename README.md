@@ -12,7 +12,7 @@ We assume robot or simulator is started externally from this module.
 ## Docker image
 
 It is suggested to run these examples in docker containers. 
-Follow instructions in [PetriNetPlans/docker](/docker) to build 
+Follow instructions in [PetriNetPlans/docker](https://github.com/iocchi/PetriNetPlans/tree/master/docker) to build 
 a PNP docker image for Ubuntu 16.04 and ROS kinetic.
 Make sure you can succesfully run the PNP image
 ```pnp_ub1604_kinetic```
