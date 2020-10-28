@@ -12,29 +12,42 @@ We assume robot or simulator is started externally from this module.
 ## Docker image
 
 It is suggested to run these examples in docker containers. 
-Follow instructions in [PetriNetPlans/docker](https://github.com/iocchi/PetriNetPlans/tree/master/docker) to build 
+
+1. Build PetriNetPlans docker image
+
+    Follow instructions in [PetriNetPlans/docker](https://github.com/iocchi/PetriNetPlans/tree/master/docker) to build 
 a PNP docker image for Ubuntu 16.04 and ROS kinetic.
-Make sure you can succesfully run the PNP image
-```pnp_ub1604_kinetic```
 
+    Make sure you have succesfully built the image ```pnp_ub1604_kinetic```.
+    You do not need to run this image at this moment.
 
-Then, build a new docker image including this demo. Do this only once, otherwise you will build the docker image each time; to update your application after adding changes see below under run_dev.bash
+2. Build the docker image for this demo
+
+    Build a new docker image including this demo. 
 
         ./build.bash
 
-and run the image
+    Do this only once, otherwise you will build the docker image each time; to update your application after adding changes see below under `run_dev.bash`
+
+3. Run the image
 
         ./run.bash
 
-Note: if you want to link your local directories of PNP and this demo in the docker image, use instead
+----
+
+* Optional steps
+
+    Note: if you want to link your local directories of PNP and this demo in the docker image, use instead
 
         ./run_dev.bash
 
-in this way you can develop the demo within the docker container. Any time you change any C++ file, you have to compile with:
+    in this way you can develop the demo within the docker container. 
 
-	cd ros/catkin_ws
-	catkin_make
-	source devel/setup.bash
+    Any time you change any C++ file, you have to compile with:
+
+	    cd ros/catkin_ws
+	    catkin_make
+	    source devel/setup.bash
 
 
 ## Build ROS packages for this demo
