@@ -26,8 +26,8 @@ def localizer_cb(data):
     q = (o.x, o.y, o.z, o.w)
     euler = euler_from_quaternion(q)
     map_robot_pose[2] = euler[2] # yaw
-    print 'x:', map_robot_pose[0],'y:', map_robot_pose[1]
-    print 'angle of robot is', euler[2], '\n'
+    #print 'x:', map_robot_pose[0],'y:', map_robot_pose[1]
+    #print 'angle of robot is', euler[2], '\n'
     # consulting room corridor coordinates
     # CR_x1 = 35.33
     # CR_x2 = 58.37
