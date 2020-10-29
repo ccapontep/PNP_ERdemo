@@ -11,6 +11,9 @@ fi
 
 # change setings here if needed
 PLAYGROUND_FOLDER=$HOME/playground
+PNP_FOLDER=$HOME/src/PetriNetPlans
+DEMO_FOLDER=`pwd`
+
 
 echo "Running image $IMAGENAME:$VERSION ..."
 
@@ -29,6 +32,11 @@ docker run -it \
     --privileged \
     --net=host \
     -v $PLAYGROUND_FOLDER:/home/robot/playground \
+    -v $DEMO_FOLDER/er_action:/home/robot/src/er_action \
+    -v $DEMO_FOLDER/er_action_msgs:/home/robot/src/er_action_msgs \
+    -v $DEMO_FOLDER/er_pnp:/home/robot/src/er_pnp \
     $IMAGENAME:$VERSION
 
+# Add this if you want to mount also PetriNetPlans
+#    -v $PNP_FOLDER:/home/robot/src/PetriNetPlans \
 

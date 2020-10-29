@@ -10,9 +10,9 @@
 
     <!-- move_base -->
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-    <rosparam file="$(find er_action)/config/navigation2/move_base_params.yaml" command="load" />
-    <rosparam file="$(find er_action)/config/navigation2/local_costmap_params.yaml" command="load" />
-    <rosparam file="$(find er_action)/config/navigation2/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find er_action)/config/navigation/move_base_params.yaml" command="load" />
+    <rosparam file="$(find er_action)/config/navigation/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find er_action)/config/navigation/global_costmap_params.yaml" command="load" />
     </node>
 
 
@@ -22,7 +22,7 @@
     <remap from="scan" to="$(arg laser_topic)"/>
 
     <!-- Default parameters -->
-    <rosparam file="$(find er_action)/config/localization2/amcl.yaml" command="load" />
+    <rosparam file="$(find er_action)/config/localization/amcl.yaml" command="load" />
 
     <!-- Set initial pose -->
     <param name="initial_pose_x" value="$(arg initial_pose_x)" />
@@ -40,3 +40,4 @@
     <node pkg="er_action" type="closeddoor_condition.py" name="closeddoor_cond" output="screen" />
 
 </launch>
+

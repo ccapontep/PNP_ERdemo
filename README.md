@@ -33,6 +33,8 @@ a PNP docker image for Ubuntu 16.04 and ROS kinetic.
 
         ./run.bash
 
+    Note: current folder is mounted in the docker container, so file changes in docker container will be persistent.
+
 ----
 
 * Optional steps

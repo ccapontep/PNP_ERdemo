@@ -15,9 +15,9 @@ USER robot
 # Trick to disable cache from here
 ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
 
-ADD er_action /home/robot/src/er_action
-ADD er_action_msgs /home/robot/src/er_action_msgs
-ADD er_pnp /home/robot/src/er_pnp
+COPY --chown=robot:robot er_action /home/robot/src/er_action
+COPY --chown=robot:robot er_action_msgs /home/robot/src/er_action_msgs
+COPY --chown=robot:robot er_pnp /home/robot/src/er_pnp
 
 RUN cd $HOME/ros/catkin_ws/src && \
     ln -s $HOME/src/er_action . && \
