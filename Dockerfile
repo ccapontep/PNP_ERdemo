@@ -6,9 +6,14 @@ FROM pnp_1604_kinetic
 USER root
 
 RUN apt-get update && \
-    apt-get install -y ros-kinetic-rviz
+    apt-get install -y ros-kinetic-rviz && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 USER robot
+
+# Trick to disable cache from here
+ADD http://worldtimeapi.org/api/ip /tmp/time.tmp 
 
 ADD er_action /home/robot/src/er_action
 ADD er_action_msgs /home/robot/src/er_action_msgs
