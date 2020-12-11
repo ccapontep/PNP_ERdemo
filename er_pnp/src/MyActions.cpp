@@ -120,9 +120,10 @@ std::map<string, string> initMap() {
     //     std::pair<string, string>("consultingroom1", "0.71_10.56_0_0"),
     //     std::pair<string, string>("maintriage", "0_1.8_0_0")
     static std::pair<string, string> data[] = {
-        std::pair<string, string>("waitingroom", "9.36_9.56_0_0"),
-        std::pair<string, string>("maincorridor", "10.39_14.26_0_0"),
-        std::pair<string, string>("ambulancecorridor", "27.73_15.51_0_0"),
+        std::pair<string, string>("waitingroom", "10.0_10.93_0_0"),
+      //  std::pair<string, string>("maincorridor", "10.39_14.26_0_0"),
+        std::pair<string, string>("maincorridor", "14.92_13.20_0_0"),
+        std::pair<string, string>("ambulancecorridor", "27.60_15.51_0_0"),
         std::pair<string, string>("consultingcorridor", "36.56_25.11_0_0"),
         std::pair<string, string>("consultingroom1", "38.2_27.88_0_0"),
         std::pair<string, string>("consultingroom1out", "38.2_25.15_0_0"),

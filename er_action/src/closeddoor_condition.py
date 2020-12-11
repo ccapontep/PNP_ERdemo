@@ -26,15 +26,6 @@ def localizer_cb(data):
     q = (o.x, o.y, o.z, o.w)
     euler = euler_from_quaternion(q)
     map_robot_pose[2] = euler[2] # yaw
-    #print 'x:', map_robot_pose[0],'y:', map_robot_pose[1]
-    #print 'angle of robot is', euler[2], '\n'
-    # consulting room corridor coordinates
-    # CR_x1 = 35.33
-    # CR_x2 = 58.37
-    # CR_y1 = 24.32
-    # CR_y2 = 28.11
-    # (x > CR_x1 and x < CR_x2 and y > CR_y1 and y < CR_y2)
-
 
 
 def doorclosed_cb(msg):
@@ -56,13 +47,10 @@ def doorclosed_cb(msg):
     conditionName = "doorclosed"
     param = "pnp/conditionsBuffer/" + conditionName
 
-    # print 'x:', x, '\ty:', y
-    # print getRobotPose('',0,0,0)
-    # print getRobotPose()
 
     # check if robot is inside the corridor
     if (CR_y[0] <= y <= CR_y[1]) and (CR1_x[0] <= x <= CR1_x[1] or CR2_x[0] <= x <= CR2_x[1] or CR3_x[0] <= x <= CR3_x[1] or CR4_x[0] <= x <= CR4_x[1]):
-        print 'In location outside of door'
+        # print 'In location outside of door'
         if angle <= 0.035 and angle > -0.035:
             # middle position in the range is the position right in front of the robot
             pp = 719
@@ -74,10 +62,10 @@ def doorclosed_cb(msg):
         else: laser_center_dist = 0
 
         if laser_center_dist > 1.6:
-            print 'Door open'
+            # print 'Door open'
             rospy.set_param(param, 0)
         else:
-            print 'Door closed'
+            # print 'Door closed'
             rospy.set_param(param, 1)
     else:
         rospy.set_param(param, 0)
